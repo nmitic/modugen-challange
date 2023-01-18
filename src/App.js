@@ -11,9 +11,13 @@ const initialValues = {
     firstName: '',
     lastName: '',
     email: '',
-    streetAndNumber: '',
-    zipcodeAndCity: '',
+
+    streetName: '',
+    streetNumber: '',
+    zipcode: '',
+    city: '',
     country: '',
+
     creditCardName: '',
     creditCardNumber: '',
     creditCardExpiryDate: '',
@@ -42,6 +46,15 @@ function App() {
                     .max(20, 'Must be 20 characters or less')
                     .required('Required'),
                 email: Yup.string().email('Invalid email address').required('Required'),
+                streetName: Yup.string().required('Required'),
+                streetNumber: Yup.number().required('Required'),
+                zipcode: Yup.string().required('Required'),
+                city: Yup.number().required('Required'),
+                country: Yup.string().required('Required'),
+                creditCardName: Yup.string().required('Required'),
+                creditCardNumber: Yup.number().required('Required'),
+                creditCardExpiryDate: Yup.date().required('Required'),
+                creditCardSecurityCode: Yup.number().required('Required'),
             })}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
@@ -66,11 +79,22 @@ function App() {
                                 },
                                 {
                                     title: 'Address',
-                                    valid: true
+                                    valid: isSetOfFieldsValid([
+                                        'streetName',
+                                        'streetNumber',
+                                        'zipcode',
+                                        'city',
+                                        'country'
+                                    ], formik)
                                 },
                                 {
                                     title: 'Payment',
-                                    valid: true
+                                    valid: isSetOfFieldsValid([
+                                        'creditCardName',
+                                        'creditCardNumber',
+                                        'creditCardExpiryDate',
+                                        'creditCardSecurityCode'
+                                    ], formik)
                                 }
                             ]}
                         />
@@ -115,25 +139,50 @@ function App() {
                         <div className={cn(styles.Step, {[styles.StepShown]: step === 1})}>
 
                             <TextField
-                                id="streetAndNumber"
-                                name="streetAndNumber"
-                                label="Street and Number"
-                                value={formik.values.streetAndNumber}
+                                id="streetName"
+                                name="streetName"
+                                label="Street name"
+                                value={formik.values.streetName}
                                 onChange={formik.handleChange}
-                                error={formik.touched.streetAndNumber && Boolean(formik.errors.streetAndNumber)}
-                                helperText={formik.touched.streetAndNumber && formik.errors.streetAndNumber}
+                                error={formik.touched.streetName && Boolean(formik.errors.streetName)}
+                                helperText={formik.touched.streetName && formik.errors.streetName}
                             />
 
                             <br/>
 
                             <TextField
-                                id="zipcodeAndCity"
-                                name="zipcodeAndCity"
-                                label="Zipcode and city"
-                                value={formik.values.zipcodeAndCity}
+                                id="streetNumber"
+                                name="streetNumber"
+                                type="number"
+                                label="Street number"
+                                value={formik.values.streetNumber}
                                 onChange={formik.handleChange}
-                                error={formik.touched.zipcodeAndCity && Boolean(formik.errors.zipcodeAndCity)}
-                                helperText={formik.touched.zipcodeAndCity && formik.errors.zipcodeAndCity}
+                                error={formik.touched.streetNumber && Boolean(formik.errors.streetNumber)}
+                                helperText={formik.touched.streetNumber && formik.errors.streetNumber}
+                            />
+
+                            <br/>
+
+                            <TextField
+                                id="zipcode"
+                                name="zipcode"
+                                label="Zipcode"
+                                value={formik.values.zipcode}
+                                onChange={formik.handleChange}
+                                error={formik.touched.zipcode && Boolean(formik.errors.zipcode)}
+                                helperText={formik.touched.zipcode && formik.errors.zipcode}
+                            />
+
+                            <br/>
+
+                            <TextField
+                                id="city"
+                                name="city"
+                                label="City"
+                                value={formik.values.city}
+                                onChange={formik.handleChange}
+                                error={formik.touched.city && Boolean(formik.errors.city)}
+                                helperText={formik.touched.city && formik.errors.city}
                             />
 
                             <br/>
