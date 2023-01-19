@@ -5,19 +5,18 @@ export const CheckoutStepsNav = ({steps, setStep}) => {
     return (
         <>
             {
-                steps.map((step, index) => {
-                    return (
-                        <button
-                            className={cn({
-                                [styles.InvalidStep]: !step.valid
-                            })}
-                            type="button"
-                            onClick={() => setStep(index)}
-                        >
-                            {step.title}
-                        </button>
-                    )
-                })
+                steps.map((step, index) => (
+                    <button
+                        className={cn({
+                            [styles.InvalidStep]: !step.valid
+                        })}
+                        type="button"
+                        onClick={() => setStep(index)}
+                        key={step.id}
+                    >
+                        {step.title}
+                    </button>
+                ))
             }
         </>
     )
