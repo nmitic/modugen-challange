@@ -7,6 +7,7 @@ const CHECKOUT_FORM_DATA = [
     {
         title: 'Personal information',
         id: 'personal-information-id',
+        icon: 'BADGE',
         fields: [
             {
                 id: 'firstName',
@@ -31,6 +32,7 @@ const CHECKOUT_FORM_DATA = [
     {
         title: 'Address',
         id: 'address-id',
+        icon: 'HOME',
         fields: [
             {
                 id: 'streetName',
@@ -67,6 +69,7 @@ const CHECKOUT_FORM_DATA = [
     {
         title: 'Payment data',
         id: 'payment-data',
+        icon: 'ACCOUNT_BALANCE',
         fields: [
             {
                 id: 'creditCardName',
@@ -107,7 +110,6 @@ const CHECKOUT_FORM_DATA = [
         ]
     }
 ]
-
 
 function App() {
     return (

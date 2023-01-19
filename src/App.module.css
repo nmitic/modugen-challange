@@ -1,11 +1,3 @@
 .App {
   text-align: center;
 }
-
-.Step {
-  display: none;
-}
-
-.StepShown {
-  display: block;
-}
