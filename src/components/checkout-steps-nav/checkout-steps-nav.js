@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './checkout-steps-nav.module.css'
 import {ICON_TO_COMPONENT_MAP} from "./checkout-steps-nav.enums";
 
@@ -23,4 +24,14 @@ export const CheckoutStepsNav = ({steps, setStep}) => {
             }
         </div>
     )
+}
+
+CheckoutStepsNav.propTypes = {
+    setStep: PropTypes.func.isRequired,
+    steps: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        valid: PropTypes.bool.isRequired,
+        id: PropTypes.string.isRequired,
+        icon: PropTypes.oneOf(Object.keys(ICON_TO_COMPONENT_MAP)),
+    })).isRequired
 }

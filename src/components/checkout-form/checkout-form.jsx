@@ -1,5 +1,6 @@
 import {Form, Formik} from "formik";
 import {useState} from "react";
+import PropTypes from 'prop-types';
 import cn from "classnames";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
@@ -7,6 +8,7 @@ import Button from "@mui/material/Button";
 import {CheckoutStepsNav} from "../checkout-steps-nav/checkout-steps-nav";
 import styles from "./sheckout-form.module.css";
 import {getFlattenFields, isFieldValid, isSetOfFieldsValid} from "./checkout-form.utils";
+import {ICON_TO_COMPONENT_MAP} from "../checkout-steps-nav/checkout-steps-nav.enums";
 
 export const CheckoutForm = ({checkoutFormData}) => {
     const [step, setStep] = useState(0)
@@ -60,10 +62,9 @@ export const CheckoutForm = ({checkoutFormData}) => {
                                 <h3>{stepData.title}</h3>
                                 {
                                     stepData.fields.map(field => (
-                                        <div className={styles.field}>
+                                        <div className={styles.field} key={field.id}>
                                             <TextField
                                                 fullWidth
-                                                key={field.id}
                                                 id={field.name}
                                                 name={field.name}
                                                 label={field.label}
@@ -86,4 +87,18 @@ export const CheckoutForm = ({checkoutFormData}) => {
             )}
         </Formik>
     )
+}
+
+CheckoutForm.prototype = {
+    checkoutFormData: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        icon: PropTypes.oneOf(Object.keys(ICON_TO_COMPONENT_MAP)),
+        fields: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+            validationSchema: PropTypes.func.isRequired,
+        })).isRequired
+    })).isRequired
 }
