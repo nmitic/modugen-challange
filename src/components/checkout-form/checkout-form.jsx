@@ -9,6 +9,7 @@ import {CheckoutStepsNav} from "../checkout-steps-nav/checkout-steps-nav";
 import styles from "./sheckout-form.module.css";
 import {getFlattenFields, isFieldValid, isSetOfFieldsValid} from "./checkout-form.utils";
 import {ICON_TO_COMPONENT_MAP} from "../checkout-steps-nav/checkout-steps-nav.enums";
+import {TEST_ID} from "./checkout-form.enums";
 
 export const CheckoutForm = ({checkoutFormData}) => {
     const [step, setStep] = useState(0)
@@ -58,11 +59,18 @@ export const CheckoutForm = ({checkoutFormData}) => {
 
                     {
                         checkoutFormData.map((stepData, index) => (
-                            <div className={cn(styles.step, {[styles.stepShown]: step === index})} key={stepData.id}>
+                            <div
+                                className={cn(styles.step, {[styles.stepShown]: step === index})}
+                                key={stepData.id}
+                                data-testid={TEST_ID.STEP}
+                            >
                                 <h3>{stepData.title}</h3>
                                 {
                                     stepData.fields.map(field => (
-                                        <div className={styles.field} key={field.id}>
+                                        <div
+                                            className={styles.field}
+                                            key={field.id}
+                                        >
                                             <TextField
                                                 fullWidth
                                                 id={field.name}
@@ -80,7 +88,12 @@ export const CheckoutForm = ({checkoutFormData}) => {
                         ))
                     }
 
-                    <Button color="primary" variant="contained" type="submit">
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        type="submit"
+                        data-testid={TEST_ID.FORM_SUBMIT}
+                    >
                         Submit
                     </Button>
                 </Form>

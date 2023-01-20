@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './checkout-steps-nav.module.css'
-import {ICON_TO_COMPONENT_MAP} from "./checkout-steps-nav.enums";
+import {ICON_TO_COMPONENT_MAP, TEST_ID} from "./checkout-steps-nav.enums";
 
 export const CheckoutStepsNav = ({steps, setStep}) => {
     return (
@@ -15,8 +15,12 @@ export const CheckoutStepsNav = ({steps, setStep}) => {
                             onClick={() => setStep(index)}
                             key={step.id}
                             className={styles.icon}
+                            data-testid={TEST_ID.NAV_ITEM}
                         >
-                            <Icon color={ !step.valid ? 'error' : 'primary' } />
+                            <Icon
+                                color={ !step.valid ? 'error' : 'primary' }
+                                data-testid={TEST_ID.ICON_NAV_ITEM}
+                            />
                             {step.title}
                         </button>
                     )
